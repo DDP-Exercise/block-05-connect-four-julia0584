@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="">
 <head>
     <meta charset="UTF-8">
-    <title>Connect Four</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect 4</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!--TODO: Build the Markup for your Game. Don't forget to style it in a cascading stylesheet. -->
 
+<body>
+    <h1>Connect 4</h1>
+    <h2 id="winner"></h2>
+    <div id="btn"></div>
+    <div id="game">
+        <div id="player1">
+            <img src="./img/angel.png">
+        </div>
+
+        <div id="battlefield"></div>
+
+        <div id="player2" class="glowField">
+            <img src="./img/devil.png">
+        </div>
+    </div>
 </body>
+<script type="module" src="./js/view.polished.js"></script>
+<script type="module" src="./js/controller.connectfour.js"></script>
+<script type="module" src="./js/model.connectfour.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 </html>
