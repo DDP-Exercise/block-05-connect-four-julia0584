@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e3007c-48cf-4261-81d3-1ae2bbe7a2ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controller.connectfour.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controller.connectfour.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/model.connectfour.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/model.connectfour.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/view.console.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/view.polished.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/view.polished.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +34,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/juliahofer/Scripting/block-05-connect-four-julia0584&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -80,7 +75,8 @@
       <workItem from="1778229022765" duration="30016000" />
       <workItem from="1778486868934" duration="21936000" />
       <workItem from="1778653968467" duration="1253000" />
-      <workItem from="1778670041511" duration="4431000" />
+      <workItem from="1778670041511" duration="4520000" />
+      <workItem from="1778680152837" duration="115000" />
     </task>
     <servers />
   </component>
