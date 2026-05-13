@@ -1,39 +1,159 @@
 "use strict";
 
-//TODO: Think of this model as the game-logic.
-//      The model knows everything that is neccessary to manage
-//      the game. It knows the players, know who's turn it is,
-//      knows all the stones and where they are, knows if the
-//      game is over and if so, why (draw or winner). It knows
-//      which stones are the winning stones. The model also has
-//      sovereignty over the battlefield.
-//      First step: Create your model-object with all the properties
-//      necessary to store that information.
+const BATTLEFIELD = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
+];
 
-//TODO: Prepare some customEvents. The model should dispatch events when
-//      - The Player Changes
-//      - A stone was inserted
-//      - The Game is over (Draw or Winner)
-//      Don't forget to give your events a namespace.
-//      For each customEvent, just make a >method< for your model-object,
-//      that, when called, dispatches the event. Nothing else should
-//      happen in those methods.
+export const MODEL = {
+    player1: 1,
+    player2: 2,
+    turn: 1,
+    over: false,
+    winningStones: [],
+    winner: null,
+    battlefield: BATTLEFIELD,
 
+    playerChanged() {
+        const CUSTOMEVENT = new CustomEvent("connectfour:playerChange", {
+            detail: {
+                player: this.turn,
+            }
+        });
+        document.dispatchEvent(CUSTOMEVENT);
+    },
 
-//TODO: Initiate the battlefield. Your model needs a representation of the
-//      battlefield as data (two-dimensional array). Obviously, there are
-//      no stones yet in the field.
+    stoneInserted() {
+        const CUSTOMEVENT = new CustomEvent("connectfour:stoneInserted", {
+            detail: {
+                battlefield: this.battlefield,
+                over: this.over,
+            }
+        });
+        document.dispatchEvent(CUSTOMEVENT);
+    },
 
-//TODO: The model should offer a method to insert a stone at a given column.
-//      If the stone can be inserted, the model should insert the stone,
-//      dispatch an event to let the world know that the battlefield has changed
-//      and check if the game is over now.
-//      Hint: This method will be called later by your controller, when the
-//      user makes an according input.
+    gameOver() {
+        const CUSTOMEVENT = new CustomEvent("connectfour:gameOver", {
+            detail: {
+                over: this.over,
+                winningStones: this.winningStones,
+                winner: this.winner
+            }
+        });
+        document.dispatchEvent(CUSTOMEVENT);
+    },
 
-//TODO: Methods to check if the game is over, either by draw or a win.
-//      Let the world know in both cases what happend. If it's a win,
-//      Don't forget to store the winning stones and add this >detail<
-//      to your custom event.
+    insert(col) {
+        if (this.over) return;
+        for (let i = 5; i >= 0; i--) {
+            if (this.battlefield[i][col] === 0) {
+                let pos = this.turn;
+                this.battlefield[i][col] = pos;
+                console.log(this.battlefield);
 
-//TODO: Method to change the current player (and dispatch the according event).
+                this.stoneInserted();
+                this.checkGameOver();
+                if(this.over === false){
+                    this.changePlayer();
+                }
+                return;
+            }
+        }
+    },
+    checkGameOver() {
+        for (let i = 5; i >= 0; i--) {
+            for (let x = 6; x >= 0; x--) { //Schleife startet bei battlefield[5][5]
+                //horizontal
+                if (x >= 3 && this.battlefield[i][x] === 1 && this.battlefield[i][x - 1] === 1 && this.battlefield[i][x - 2] === 1 && this.battlefield[i][x - 3] === 1) {
+                    this.winner = 1;
+                    this.winningStones = [[i,x],[i,x-1],[i,x-2],[i,x-3]];
+                    this.over = true;
+                    this.gameOver();
+                    return;
+                } else if (x >= 3 && this.battlefield[i][x] === 2 && this.battlefield[i][x - 1] === 2 && this.battlefield[i][x - 2] === 2 && this.battlefield[i][x - 3] === 2) {
+                    this.winner = 2;
+                    this.winningStones = [[i,x],[i,x-1],[i,x-2],[i,x-3]];
+                    this.over = true;
+                    this.gameOver();
+                    return;
+                }
+                //vertikal
+                else if (i >= 3 && this.battlefield[i][x] === 1 && this.battlefield[i - 1][x] === 1 && this.battlefield[i - 2][x] === 1 && this.battlefield[i - 3][x] === 1) {
+                    this.winner = 1;
+                    this.winningStones = [[i,x],[i-1,x],[i-2,x],[i-3,x]];
+                    this.over = true;
+                    this.gameOver();
+                    return;
+                } else if (i >= 3 && this.battlefield[i][x] === 2 && this.battlefield[i - 1][x] === 2 && this.battlefield[i - 2][x] === 2 && this.battlefield[i - 3][x] === 2) {
+                    this.winner = 2;
+                    this.over = true;
+                    this.winningStones = [[i,x],[i-1,x],[i-2,x],[i-3,x]];
+                    this.gameOver();
+                    return;
+                }
+                //slash
+                else if (i >= 3 && x <= 3 && this.battlefield[i][x] === 1 && this.battlefield[i - 1][x + 1] === 1 && this.battlefield[i - 2][x + 2] === 1 && this.battlefield[i - 3][x + 3] === 1) {
+                    this.winner = 1;
+                    this.over = true;
+                    this.winningStones = [[i,x],[i-1,x+1],[i-2,x+2],[i-3,x+3]];
+                    this.gameOver();
+                    return;
+                } else if (i >= 3 && x <= 3 && this.battlefield[i][x] === 2 && this.battlefield[i - 1][x + 1] === 2 && this.battlefield[i - 2][x + 2] === 2 && this.battlefield[i - 3][x + 3] === 2) {
+                    this.winner = 2;
+                    this.over = true;
+                    this.winningStones = [[i,x],[i-1,x+1],[i-2,x+2],[i-3,x+3]];
+                    this.gameOver();
+                    return;
+                }
+                //backslash
+                else if (i >= 3 && x >= 3 && this.battlefield[i][x] === 1 && this.battlefield[i - 1][x - 1] === 1 && this.battlefield[i - 2][x - 2] === 1 && this.battlefield[i - 3][x - 3] === 1) {
+                    this.winner = 1;
+                    this.over = true;
+                    this.winningStones = [[i,x],[i-1,x-1],[i-2,x-2],[i-3,x-3]];
+                    this.gameOver();
+                    return;
+                } else if (i >= 3 && x >= 3 && this.battlefield[i][x] === 2 && this.battlefield[i - 1][x - 1] === 2 && this.battlefield[i - 2][x - 2] === 2 && this.battlefield[i - 3][x - 3] === 2) {
+                    this.winner = 2;
+                    this.over = true;
+                    this.winningStones = [[i,x],[i-1,x-1],[i-2,x-2],[i-3,x-3]];
+                    this.gameOver();
+                    return;
+                }
+                //draw
+                let draw = true;
+                for (let i = 5; i >= 0; i--) {
+                    for (let x = 6; x >= 0; x--) {
+                        if (this.battlefield[i][x] === 0) {
+                            draw = false;
+                            break;
+                        }
+                    }
+                }
+                if (draw === true) {
+                    this.over = true;
+                    this.winner = 0;
+                    this.gameOver();
+                    return;
+                }
+            }
+        }
+    },
+    changePlayer(){
+        if(this.over === false){
+            if(this.turn === 1){
+                this.turn = 2;
+                this.playerChanged();
+            }
+            else if(this.turn === 2){
+                this.turn = 1;
+                this.playerChanged();
+            }
+        }
+    }
+
+}

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Lilita+One&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Quicksand:wght@300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+    font-family: "Chewy", system-ui;
+    font-weight: 400;
+    font-size: 25px;
+    font-style: normal;
+    text-align: center;
+    background-color: aliceblue;
+    color:lightskyblue;
+    text-shadow:  2px 2px 0px deepskyblue;
+
+}
+
+#game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:15px;
+}
+
+#battlefield{
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 510px;
+    width: 594px;
+    background-color: lightskyblue;
+    border-left: 15px solid deepskyblue;
+    border-right: 15px solid deepskyblue;
+    border-radius: 30px;
+    box-shadow: 0 8px 15px 0 lightskyblue;
+}
+
+.field{
+    height: 64px;
+    width: 64px;
+    margin: 5px;
+    background-color: aliceblue;
+    border: 5px solid deepskyblue;
+    border-radius: 50px;
+}
+
+.player1{
+    background-color:#2389af;
+}
+.player2{
+    background-color:#f94151;
+}
+
+.button{
+    background-color: lightskyblue;
+    border-radius: 10px;
+    border: none;
+    border-left: 7px solid deepskyblue;
+    border-right: 7px solid deepskyblue;
+    color: deepskyblue;
+    padding: 15px 32px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 35px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px 0 lightskyblue;
+    font-family: "Chewy", system-ui;
+}
+.button:hover {
+    background-color: deepskyblue;
+    color: lightskyblue;
+    transform: translateY(4px);
+    box-shadow: 0 1px 5px 0 deepskyblue;
+}
+
+.activeDevil{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:gold;
+    box-shadow: 0 0 60px gold;
+}
+
+.activeAngel{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #26c9cb;
+    box-shadow: 0 0 60px #26c9cb;
+}
+
+.inactiveDevil{
+    opacity: 0.5;
+}
+
+.inactiveAngel{
+    opacity: 0.5;
+}
+
+.winningStone{
+    border: 5px solid gold;
+    box-shadow: 0 0 25px gold;
+    background-color: gold;
+}
+
