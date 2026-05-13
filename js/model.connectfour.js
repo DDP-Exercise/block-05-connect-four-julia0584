@@ -2,7 +2,7 @@
 
 //TODO: Think of this model as the game-logic.
 //      The model knows everything that is neccessary to manage
-//      the game. It knows the players, know who's turn it is,
+//      the game. It knows the players, know who's turn it i
 //      knows all the stones and where they are, knows if the
 //      game is over and if so, why (draw or winner). It knows
 //      which stones are the winning stones. The model also has
